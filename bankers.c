@@ -14,7 +14,6 @@ int main()
     return 0;
 }
 
-//Banker's Algorithm
 void read(int alloc[][10], int max[][10], int avail[10], int need[][10], int n, int m) {
 
     int i, j;
@@ -39,10 +38,10 @@ void read(int alloc[][10], int max[][10], int avail[10], int need[][10], int n, 
     for (i = 0; i < m; ++i) {
         scanf("%d", &avail[i]);
     }
-    // Calculating Need matrix
+    
     for (i = 0; i < n; ++i) {
         for (j = 0; j < m; ++j) {
-            need[i][j] = max[i][j] - alloc[i][j];        /* need = max - allocated */
+            need[i][j] = max[i][j] - alloc[i][j];
         }
     }
 
@@ -56,25 +55,21 @@ void read(int alloc[][10], int max[][10], int avail[10], int need[][10], int n, 
     safety(alloc, avail, need, n, m);
 }
 
-//Safety algorithm
-
-/* available >= need, then available += allocated */
-
 int safety(int alloc[][10], int avail[10], int need[][10], int n, int m)  {
 
     int i, j, k, index = 0;
-    int isDone[10], sequence[10], count = 0;            /* array to store safety sequence */
+    int isDone[10], sequence[10], count = 0;
 
     for (i = 0; i < n; ++i) {
-        isDone[i] = 0;                                  /* array-> |0|0|0|0|0| */
+        isDone[i] = 0; 
     }
 
-    for (k = 0; k < n; ++k) {                           /* Iterating for possible deadlock to prevent infinite loop */
+    for (k = 0; k < n; ++k) {
 
         // main process starts
         for (i = 0; i < n; ++i)
         {
-            if (isDone[i] == 0) {                       /* pending */
+            if (isDone[i] == 0) {
                 for (j = 0; j < m; ++j)
                 {
                     if (avail[j] >= need[i][j]) {
@@ -84,18 +79,18 @@ int safety(int alloc[][10], int avail[10], int need[][10], int n, int m)  {
                         break;
                     }
                 }
-                if (j == m) {                           /* True: avail >= need */
+                if (j == m) {
                     for (j = 0; j < m; ++j) {
                         avail[j] += alloc[i][j];
                     }
-                    count++;                            /* done process's count */
+                    count++;
                     isDone[i] = 1;
-                    sequence[count - 1] = i + 1;        /* safe state sequence */
+                    sequence[count - 1] = i + 1;
                 }
             }
         }
         
-        if (count == n) {                               /* safe state */
+        if (count == n) {
             printf("\nIT'S A SAFE STATE\n");
             printf("The safe sequence is\n");
             int i;
@@ -110,7 +105,7 @@ int safety(int alloc[][10], int avail[10], int need[][10], int n, int m)  {
     } /* deadlock check loop ends */
 
     if (count != n) {
-        printf("\nDeadlock has occured.\n");            /* deadlock */
+        printf("\nDeadlock has occured.\n");
     }
 }
 
