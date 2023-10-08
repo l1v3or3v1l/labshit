@@ -20,7 +20,7 @@ void firstFit(int blockSize[], int m, int processSize[], int n) {
 	for (i = 0; i < n; i++) {
 		printf("%d\t\t\t", i+1);
 		printf("%d\t\t\t\t", processSize[i]);
-		if (allocation[i] != 1) {
+		if (allocation[i] != -1) {
 			printf("%d", allocation[i] + 1);
 		} else {
 			printf("Not Allocated");
