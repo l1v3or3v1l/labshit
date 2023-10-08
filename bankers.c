@@ -66,7 +66,6 @@ int safety(int alloc[][10], int avail[10], int need[][10], int n, int m)  {
 
     for (k = 0; k < n; ++k) {
 
-        // main process starts
         for (i = 0; i < n; ++i)
         {
             if (isDone[i] == 0) {
@@ -100,9 +99,8 @@ int safety(int alloc[][10], int avail[10], int need[][10], int n, int m)  {
             printf("\n");
             break;
         }
-        // main process ends
 
-    } /* deadlock check loop ends */
+    }
 
     if (count != n) {
         printf("\nDeadlock has occured.\n");
